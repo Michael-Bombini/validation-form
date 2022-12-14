@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useState } from "react";
 
 const schema = yup.object().shape({
+    // .email() tolto per vedere se funzionava la validazione lato server
   email: yup.string().required(),
   password: yup.string().min(8).max(32).required(),
 });
