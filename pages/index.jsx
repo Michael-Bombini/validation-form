@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useForm } from "react-hook-form";
+import  axios  from "axios";
 
 export default function Home() {
   const {
@@ -8,8 +9,12 @@ export default function Home() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data.name);
+  const onSubmit = async (data) => {
+
+    
+    await axios.post('/api/hello', data)
+
+
   };
   return (
     <div>
@@ -43,3 +48,4 @@ export default function Home() {
     </div>
   );
 }
+
