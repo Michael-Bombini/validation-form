@@ -7,20 +7,23 @@ export default async function handler(req, res) {
     password: yup.string().min(8).max(32).required(),
   });
 
-  const body = req.body
+  const body = req.body;
   console.log(body);
   try {
-    await schema.validate({ email: body.email, password: body.password }, {abortEarly: false });
-    res.status(200).json({ name: body })
+    await schema.validate(
+      { email: body.email, password: body.password },
+      { abortEarly: false }
+    );
+    res.status(200).json({ name: body });
   } catch (error) {
     const errorsObj = error.errors.reduce((acc, err) => {
       // extract the key from the error message
-      const key = err.split(' ')[0];
+      const key = err.split(" ")[0];
       // add the key and error message to the errors object
       acc[key] = err;
       return acc;
     }, {});
     console.log(errorsObj);
-
+    res.status(501).json({errori : errorsObj});
   }
 }

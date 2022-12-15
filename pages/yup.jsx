@@ -25,18 +25,19 @@ const Pippo = () => {
         await axios.post('/api/hello', data)
     reset();
     } catch (err) {
-        setError(err.response.data.error)
+        setError(err.response.data.errori)
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <h2>Lets sign you in.</h2>
-      <div>{error && <p>{error}</p>}</div>
+      <div>{error && <p>{JSON.stringify(error)}</p>}</div>
       <br />
 
-      <input {...register("email")} placeholder="email" type="email" required />
+      <input {...register("email")} placeholder="email" type="text" required />
       <p>{errors.email?.message}</p>
+      <p>{error ? error.email : ' ' }</p>
       <br />
 
       <input
@@ -46,6 +47,7 @@ const Pippo = () => {
         required
       />
       <p>{errors.password?.message}</p>
+      <p>{error ? error.password : ' ' }</p>
       <br />
 
       <button type="submit">Sign in</button>
