@@ -8,7 +8,7 @@ import { useState } from "react";
 const schema = yup.object().shape({
     // .email() tolto per vedere se funzionava la validazione lato server
   email: yup.string().required(),
-  password: yup.string().min(8).max(32).required(),
+  password: yup.string().max(32).required(),
 });
 
 const Pippo = () => {
@@ -24,8 +24,8 @@ const Pippo = () => {
         setError(null)
         await axios.post('/api/hello', data)
     reset();
-    } catch (error) {
-        setError('errore')
+    } catch (err) {
+        setError(err.response.data.error)
     }
   };
 
